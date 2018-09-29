@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import java.io.Closeable;
 import java.io.File;
 
 public class FileUtil {
@@ -30,6 +31,15 @@ public class FileUtil {
 		for (File file : dir.listFiles()) {
 			if (file.isFile()) file.delete(); // 删除所有文件
 			else if (file.isDirectory()) deleteDirWithFile(path); // 递规的方式删除文件夹
+		}
+	}
+
+	public static void closeSilently(Closeable c) {
+		if (c == null) return;
+		try {
+			c.close();
+		} catch (Throwable t) {
+			// do nothing
 		}
 	}
 }
