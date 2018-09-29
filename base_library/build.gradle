@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.neenbedankt.android-apt'/*使用该库时也需要在build,gradle文件中引入这句话*/
 
 android {
     compileSdkVersion 24
@@ -30,9 +29,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.android.support:recyclerview-v7:25.3.1'
-    // 添加ButterKnife注解
-    compile 'com.jakewharton:butterknife:8.2.1'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'/*使用该库时也需要在build,gradle文件中引入这句话*/
+
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
 
     compile 'io.reactivex:rxjava:1.0.14'
