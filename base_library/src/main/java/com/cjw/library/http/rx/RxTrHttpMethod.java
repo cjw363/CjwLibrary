@@ -1,9 +1,12 @@
 package com.cjw.library.http.rx;
 
 
+import com.cjw.library.utils.LogUtil;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -51,6 +54,16 @@ public class RxTrHttpMethod {
         httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         httpClientBuilder.writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         httpClientBuilder.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+
+        //新建log拦截器
+        HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                LogUtil.d("OkHttp-Info:"+message);
+            }
+        });
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpClientBuilder.addInterceptor(loggingInterceptor);
         //设置缓存
 //        File httpCacheDirectory = new File(FileUtils.getCacheDir(mContext), "OkHttpCache");
 //        httpClientBuilder.cache(new Cache(httpCacheDirectory, 10 * 1024 * 1024));

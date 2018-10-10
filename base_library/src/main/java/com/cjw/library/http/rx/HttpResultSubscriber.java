@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.cjw.library.utils.LogUtil;
 import com.cjw.library.view.dialog.LoadingDialog;
 import com.cjw.library.view.dialog.TipDialog;
-import com.google.gson.Gson;
 
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
@@ -42,7 +40,7 @@ public abstract class HttpResultSubscriber<T> extends Subscriber<HttpResult<T>> 
 
   @Override
   public void onNext(HttpResult<T> t) {
-    LogUtil.d(new Gson().toJson(t));
+//    LogUtil.d(new Gson().toJson(t));
     if (t.code == 1) {
       _onSuccess(t.result);
     } else {
